@@ -1,12 +1,12 @@
 import React from "react";
 // import {  withRouter  } from "react-router-dom";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate,} from "react-router-dom";
 import "./menu-item.style.css";
 
 const MenuItem = ({ title, imageUrl, size, linkUrl }) => {
 	const navigate = useNavigate();
-	const location = useLocation();
-	const params = useParams();
+	// const location = useLocation();
+	// const params = useParams();
 
 	// console.log(params)
 	return (
