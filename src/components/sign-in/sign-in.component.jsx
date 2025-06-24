@@ -3,42 +3,47 @@ import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import "./sign-in.component.css";
 import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase.utils";
 
 class SignIn extends React.Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			email: "",
 			password: "",
 		};
 	}
 
-	handleSubmit = (event) => {
+	handleSubmit = async (event) => {
 		event.preventDefault();
+		const { email, password } = this.state;
 
-		this.setState({ email: " ", password: " " });
+		try {
+			await signInWithEmailAndPassword(auth, email, password);
+			this.setState({ email: "", password: "" });
+		} catch (error) {
+			console.error("Sign in error:", error);
+		}
 	};
+
 	handleChange = (e) => {
 		const { name, value } = e.target;
-
 		this.setState({ [name]: value });
 	};
 
 	render() {
 		return (
 			<div className="sign-in">
-				<h2>I already have an Account</h2>
-				<span>Sign In with email and Password</span>
+				<h2>I already have an account</h2>
+				<span>Sign in with your email and password</span>
 
-				<form
-					action=""
-					onSubmit={this.handleSubmit}>
+				<form onSubmit={this.handleSubmit}>
 					<FormInput
 						type="email"
 						name="email"
 						value={this.state.email}
-						handleChange={this.handleChange}
+						onChange={this.handleChange}
 						label="Email"
 						required
 					/>
@@ -46,7 +51,7 @@ class SignIn extends React.Component {
 						type="password"
 						name="password"
 						value={this.state.password}
-						handleChange={this.handleChange}
+						onChange={this.handleChange}
 						label="Password"
 						required
 					/>

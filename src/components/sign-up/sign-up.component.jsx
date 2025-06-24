@@ -38,13 +38,13 @@ class SignUp extends React.Component {
 				email: "",
 				password: "",
 				confirmPassword: "",
-            });
+			});
 		} catch (error) {
 			console.error("Error during sign up:", error);
 		}
 	};
 
-    handleChange = (event) => {
+	handleChange = (event) => {
 		const { name, value } = event.target;
 		this.setState({ [name]: value });
 	};
@@ -91,11 +91,7 @@ class SignUp extends React.Component {
 						label="Confirm Password"
 						required
 					/>
-					<CustomButton
-						type="submit"
-						onClick={this.handleSubmit}>
-						SIGN UP
-					</CustomButton>
+					<CustomButton type="submit">SIGN UP</CustomButton>
 				</form>
 			</div>
 		);
